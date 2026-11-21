@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CasaTrack: construction progress in 3D</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="style.css">
+<script type="importmap">
+{ "imports": { "three": "./three.module.js" } }
+</script>
+</head>
+<body>
+<canvas id="c"></canvas>
+
+<div id="top">
+	<div class="brand"><b>CasaTrack</b> <span id="pname"></span></div>
+	<div class="grp seg" id="views">
+		<button data-view="orbit" title="Orbit view (O)">Orbit</button>
+		<button data-view="walk" title="Walk through the house (W key walks, Q exits)">Walk</button>
+		<button id="vr" disabled title="Meta Quest 3: VR">VR</button>
+		<button id="ar" disabled title="Meta Quest 3: passthrough, tabletop model">AR</button>
+	</div>
+	<div class="grp seg" id="colors">
+		<button data-color="real" title="Materials as on site">Real</button>
+		<button data-color="status" title="Done, in progress, late">Status</button>
+		<button data-color="phase" title="Colour of the next phase">Phase</button>
+	</div>
+	<div class="grp seg" id="modes">
+		<button data-mode="actual" title="Actual dates, forecast after today">Actual</button>
+		<button data-mode="planned" title="Planned dates">Planned</button>
+	</div>
+	<select id="show" title="What to show">
+		<option value="all">All</option>
+		<option value="noroof">No roof</option>
+		<option value="gf">Ground floor</option>
+		<option value="found">Foundations</option>
+	</select>
+	<label class="chk" title="Show what is not built yet as a ghost"><input type="checkbox" id="xray"> X-ray</label>
+	<span id="badge"></span>
+</div>
+
+<div id="side">
+	<div class="tabs">
+		<button data-tab="report">Report</button>
+		<button data-tab="element">Elements</button>
+		<button data-tab="photos">Photos</button>
+		<button data-tab="project">Project</button>
+		<button id="fold" title="Hide the panel">‹</button>
+	</div>
+	<div id="tab-report" class="tab"></div>
+	<div id="tab-element" class="tab"></div>
+	<div id="tab-photos" class="tab"></div>
+	<div id="tab-project" class="tab"></div>
+</div>
+<button id="unfold" title="Show the panel">›</button>
+
+<div id="tl">
+	<button id="play" title="Play the construction">▶</button>
+	<button id="wk-" title="One week back ([)">−7</button>
+	<div class="track">
+		<input type="range" id="day" min="0" max="100" value="0">
+		<div id="ticks"></div>
+	</div>
+	<button id="wk+" title="One week forward (])">+7</button>
+	<button id="today" title="Today (T)">Today</button>
+	<div id="date"></div>
+</div>
+<div id="legend"></div>
+<div id="hint"></div>
+<div id="cross"></div>
+<div id="toast"></div>
+
+<div id="lightbox">
+	<div class="box">
+		<img id="lb-img" alt="">
+		<div class="lb-side">
+			<label>Date <input type="date" id="lb-date"></label>
+			<label>Note <textarea id="lb-note" rows="4"></textarea></label>
+			<button id="lb-go">View from here</button>
+			<button id="lb-pos">Use the current view as its position</button>
+			<button id="lb-del" class="danger">Delete photo</button>
+			<button id="lb-close">Close</button>
+		</div>
+	</div>
+</div>
+
+<div id="printarea"></div>
+<input type="file" id="file-photo" accept="image/*" multiple hidden>
+<input type="file" id="file-json" accept=".json,application/json" hidden>
+
+<script src="copilot.js"></script>
+<script type="module" src="./app.js"></script>
+</body>
+</html>
